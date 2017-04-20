@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('default.index');
 });
+
+Route::get('/page/{pageId}/', function ($pageId) {
+    return ['success'=>true, 'page'=>$pageId];
+});

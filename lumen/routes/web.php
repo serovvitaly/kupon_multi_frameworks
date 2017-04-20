@@ -15,3 +15,7 @@
 $app->get('/', function () use ($app) {
     return view('default.index');
 });
+
+$app->get('/page/{pageId}/', function ($pageId) {
+    return ['success'=>true, 'page'=>$pageId];
+});

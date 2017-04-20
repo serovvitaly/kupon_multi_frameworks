@@ -3,9 +3,7 @@
 namespace Domain\Interfaces;
 
 
-use Iterator;
-
-interface OfferItemsRepositoryInterface extends Iterator
+interface OfferItemsRepositoryInterface extends RepositoryInterface
 {
     public function add(OfferItemInterface $offerItem);
 
