@@ -14,9 +14,13 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('default.index');
+    return view('default2.index');
 });
 
 Route::get('/page/{pageId}/', function ($pageId) {
-    return ['success'=>true, 'page'=>$pageId];
+    return [
+        'success' => true,
+        'page' => $pageId,
+        'docs' => \App\Models\DocumentModel::all()->take(12)->toArray(),
+    ];
 });
