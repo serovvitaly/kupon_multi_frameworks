@@ -13,11 +13,13 @@
     </div>
     <div class="col-lg-12">
         <div class="row">
-            <dev class="col-lg-5"></dev>
-            <dev class="col-lg-2">
-                <button onclick="loadPosts();" class="btn btn-primary btn-block">Загрузить ещё</button>
-            </dev>
-            <dev class="col-lg-5"></dev>
+            <div class="col-lg-5"></div>
+            <div class="col-lg-2">
+                <button onclick="loadPosts();" class="btn btn-primary btn-block">
+                    <strong>Загрузить ещё</strong>
+                </button>
+            </div>
+            <div class="col-lg-5"></div>
         </div>
     </div>
 </div>

@@ -12,7 +12,8 @@
 <link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css' />
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<link href="/css/styles.css"/>
+<link href="/styles.css" rel="stylesheet"/>
+<link href="/css/styles.css" rel="stylesheet"/>
 </head>
 <body>
 <div class="container container-main">

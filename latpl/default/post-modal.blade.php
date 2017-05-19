@@ -5,8 +5,8 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <div id="modalPostHeader">
-          <img class="ribbon-icon" alt="64x64" src="/img/adme-logo.jpg">
-          <strong style="padding-left: 5px;">AdMe</strong>
+          <img class="ribbon-icon" alt="64x64" src="">
+          <strong style="padding-left: 5px;"></strong>
         </div>
       </div>
       <div class="modal-body" id="modalPostContent">
