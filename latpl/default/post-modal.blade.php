@@ -26,6 +26,8 @@
             $('#modalPostContent').html(response.html);
             $('#modalPostHeader>img').attr('src', response.ribbon_icon);
             $('#modalPostHeader>strong').html(response.ribbon_title);
+            window.oldTitle = $('head title').html();
+            $('head title').html(response.title);
         });
         $('#postModal').modal('show');
         return false;
@@ -36,6 +38,7 @@
             $('#modalPostContent').html('');
             $('#modalPostHeader>img').attr('src', '');
             $('#modalPostHeader>strong').html('');
+            $('head title').html(window.oldTitle);
         });
         @if(isset($article_id))
         showModal({{ $article_id }});

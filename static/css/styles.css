@@ -19,6 +19,8 @@
 }
 .post-content img {
     max-width: 100%;
+    display: block;
+    margin-bottom: 5px;
 }
 .post-content h1,
 .post-content h2,
@@ -90,7 +92,7 @@
     border-color: #efefef;
 }
 .post-mini .panel-content img{
-    max-width: 100%;
+    width: 100%;
     margin-bottom: 5px;
 }
 .post-mini .panel-content{

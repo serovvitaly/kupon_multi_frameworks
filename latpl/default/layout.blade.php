@@ -13,7 +13,7 @@
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link href="/styles.css" rel="stylesheet"/>
-<link href="/css/styles.css" rel="stylesheet"/>
+<link href="/css/styles.css?1" rel="stylesheet"/>
 </head>
 <body>
 <div class="container container-main">

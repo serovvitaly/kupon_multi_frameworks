@@ -17,9 +17,15 @@ Route::get('/', function () {
     return view('default.index');
 });
 
-Route::get('/page/{pageId}/', function ($pageId) {
+/**
+ * Вывод статьи по указанному идентификатору, вариант AJAX
+ */
+Route::get('/page/{pageId}/', function (int $pageId) {
 
-    $documents = \App\Models\DocumentModel::all()->take(12);
+    $docsOnPage = 12;
+    $skip = ($pageId - 1) * $docsOnPage;
+
+    $documents = \App\Models\DocumentModel::skip($skip)->take($docsOnPage)->get();
 
     $itemsArrAsHtml = [];
     /**
@@ -44,5 +50,41 @@ Route::get('/page/{pageId}/', function ($pageId) {
         'success' => true,
         'page' => $pageId,
         'items' => $itemsArrAsHtml,
+    ];
+});
+
+/**
+ * Вывод статьи по указанному идентификатору
+ */
+Route::get('/post/{postId}/', function (int $postId) {
+    $pageHtml = view('default.index', array(
+        'article_id' => $postId,
+    ));
+
+    return $pageHtml;
+});
+
+/**
+ * Вывод статьи по указанному идентификатору
+ */
+Route::get('/ajax/post/{postId}/', function (int $postId) {
+    /**
+     * @var \App\Models\DocumentModel $document
+     * @var \App\Models\RibbonModel $ribbon
+     */
+    $document = \App\Models\DocumentModel::findOrFail($postId);
+    $ribbon = \App\Models\RibbonModel::findOrFail($document->ribbon_id);
+    $pageHtml = view('default.article', [
+        'title' => $document->title,
+        'content' => $document->content,
+        'source_url' => $document->getSourceUrl(),
+        'source_base_url' => $document->getSourceBaseUrl(),
+    ])->render();
+
+    return [
+        'title' => $document->title,
+        'html' => $pageHtml,
+        'ribbon_icon' => $ribbon->getLogoUrl(),
+        'ribbon_title' => $ribbon->title,
     ];
 });
