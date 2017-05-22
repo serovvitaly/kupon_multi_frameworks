@@ -39,3 +39,5 @@
     ga('send', 'pageview');
 
 </script>
+
+<script type="text/javascript">(window.Image ? (new Image()) : document.createElement('img')).src = 'https://vk.com/rtrg?p=VK-RTRG-63840-7XXKs';</script>
