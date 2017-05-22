@@ -16,6 +16,7 @@
 <link href="/css/styles.css?1" rel="stylesheet"/>
 </head>
 <body>
+@include('default.metric')
 <div class="container container-main">
     @yield('content')
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
