@@ -2,6 +2,15 @@
 
 @section('title', 'Супер блог 2')
 
+@section('og_meta')
+@if(isset($article_id))
+<meta property="og:title" content="{{ $title }}" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{ $url }}" />
+<meta property="og:image" content="{{ $image }}" />
+@endif
+@endsection
+
 @section('center')
 <div class="row">
     <div class="col-lg-12">

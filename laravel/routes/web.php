@@ -57,8 +57,12 @@ Route::get('/page/{pageId}/', function (int $pageId) {
  * Вывод статьи по указанному идентификатору
  */
 Route::get('/post/{postId}/', function (int $postId) {
+    $document = \App\Models\DocumentModel::findOrFail($postId);
     $pageHtml = view('default.index', array(
         'article_id' => $postId,
+        'title' => $document->title,
+        'url' => 'http://zalipay.com/post/' . $postId . '/',
+        'image' => '',
     ));
 
     return $pageHtml;
