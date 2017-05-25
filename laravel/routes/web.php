@@ -40,7 +40,7 @@ Route::get('/page/{pageId}/', function (int $pageId) {
             'ribbon_title' => $ribbon->title,
             'article_title' => $document->title,
             'article_image_url' => '',
-            'article_url' => '',
+            'article_url' => $document->getUrl(),
             'article_annotation' => $document->getAnnotation(),
         ];
         $itemsArrAsHtml[] = view('default.article-mini', $viewData)->render();
@@ -57,11 +57,18 @@ Route::get('/page/{pageId}/', function (int $pageId) {
  * Вывод статьи по указанному идентификатору
  */
 Route::get('/post/{postId}/', function (int $postId) {
+    /**
+     * @var \App\Models\DocumentModel $document
+     * @var \App\Models\RibbonModel $ribbon
+     */
     $document = \App\Models\DocumentModel::findOrFail($postId);
-    $pageHtml = view('default.index', array(
+    $pageHtml = view('default.article', array(
         'article_id' => $postId,
         'title' => $document->title,
-        'url' => 'http://zalipay.com/post/' . $postId . '/',
+        'content' => $document->content,
+        'source_url' => $document->getSourceUrl(),
+        'source_base_url' => $document->getSourceBaseUrl(),
+        'url' => 'http://zalipay.com' . $document->getUrl(),
         'image' => '',
     ));
 

@@ -21,6 +21,7 @@
 
 <script>
     function showModal(postId) {
+        return true;
         history.pushState({'page_id': postId}, '', '/post/'+postId+'/');
         $.getJSON('/ajax/post/'+postId+'/?from=index', function(response){
             $('#modalPostContent').html(response.html);

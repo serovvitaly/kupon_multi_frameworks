@@ -38,4 +38,9 @@ class DocumentModel extends Model
         $sourceUrlParts = parse_url($this->getSourceUrl());
         return $sourceUrlParts['host'];
     }
+
+    public function getUrl()
+    {
+        return '/post/' . $this->id . '/';
+    }
 }
