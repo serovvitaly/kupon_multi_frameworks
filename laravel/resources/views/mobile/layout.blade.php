@@ -4,7 +4,9 @@
 <meta charset="utf-8">
 <link rel="icon" href="/favicon.ico">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#BC2C3A">
+<meta name="msapplication-TileColor" content="#FFFFFF">
 <title>@yield('title')</title>
 @yield('og_meta')
 <link rel="stylesheet" href="/styles.css">
@@ -15,15 +17,39 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link href="/styles.css" rel="stylesheet"/>
 <link href="/css/styles.css?1" rel="stylesheet"/>
+<style>
+.post-mini{
+    background: #ffffff;
+}
+.post-mini .panel-content{
+    max-height: none;
+}
+.post-mini p{
+    margin: 0 10px 10px;
+}
+.post-mini img{
+    width: 100%;
+    height: auto;
+}
+img.ribbon-icon{
+    width: 16px;
+    height: 16px;
+}
+.post-content img{
+    width: 100%;
+    height: auto;
+}
+.post-content p{
+    margin: 0 10px 10px;
+}
+</style>
 </head>
 <body>
 @include('default.metric')
 <div class="container container-main">
-    <div class="row">
-        <div class="col-lg-12 content-center">
-            @include('default.top-menu')
-            @yield('center')
-        </div>
+    <div class="content-center">
+        @include('default.top-menu')
+        @yield('center')
     </div>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="//vk.com/js/api/openapi.js?139"></script>
