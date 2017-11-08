@@ -5,8 +5,8 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <div id="modalPostHeader">
-          <img class="ribbon-icon" alt="64x64" src="/img/adme-logo.jpg">
-          <strong style="padding-left: 5px;">AdMe</strong>
+          <img class="ribbon-icon" alt="64x64" src="">
+          <strong style="padding-left: 5px;"></strong>
         </div>
       </div>
       <div class="modal-body" id="modalPostContent">
@@ -21,11 +21,14 @@
 
 <script>
     function showModal(postId) {
+        return true;
         history.pushState({'page_id': postId}, '', '/post/'+postId+'/');
         $.getJSON('/ajax/post/'+postId+'/?from=index', function(response){
             $('#modalPostContent').html(response.html);
             $('#modalPostHeader>img').attr('src', response.ribbon_icon);
             $('#modalPostHeader>strong').html(response.ribbon_title);
+            window.oldTitle = $('head title').html();
+            $('head title').html(response.title);
         });
         $('#postModal').modal('show');
         return false;
@@ -36,6 +39,7 @@
             $('#modalPostContent').html('');
             $('#modalPostHeader>img').attr('src', '');
             $('#modalPostHeader>strong').html('');
+            $('head title').html(window.oldTitle);
         });
         @if(isset($article_id))
         showModal({{ $article_id }});

@@ -2,6 +2,15 @@
 
 @section('title', 'Супер блог 2')
 
+@section('og_meta')
+@if(isset($article_id))
+<meta property="og:title" content="{{ $title }}" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{ $url }}" />
+<meta property="og:image" content="{{ $image }}" />
+@endif
+@endsection
+
 @section('center')
 <div class="row">
     <div class="col-lg-12">
@@ -13,11 +22,13 @@
     </div>
     <div class="col-lg-12">
         <div class="row">
-            <dev class="col-lg-5"></dev>
-            <dev class="col-lg-2">
-                <button onclick="loadPosts();" class="btn btn-primary btn-block">Загрузить ещё</button>
-            </dev>
-            <dev class="col-lg-5"></dev>
+            <div class="col-lg-5"></div>
+            <div class="col-lg-2">
+                <button onclick="loadPosts();" class="btn btn-primary btn-block">
+                    <strong>Загрузить ещё</strong>
+                </button>
+            </div>
+            <div class="col-lg-5"></div>
         </div>
     </div>
 </div>
