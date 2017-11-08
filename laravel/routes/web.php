@@ -12,9 +12,18 @@
 */
 
 use Illuminate\Support\Facades\Route;
+use Jenssegers\Agent\Agent;
+
+$agent = new Agent();
+
+$templatesDir = 'default';
+if ($agent->isMobile()) {
+    $templatesDir = 'mobile';
+}
+define('TEMPLATES_DIR', $templatesDir);
 
 Route::get('/', function () {
-    return view('default.index', [
+    return view(TEMPLATES_DIR . '.index', [
         'showMetric' => !env('APP_DEBUG')
     ]);
 });
@@ -45,7 +54,7 @@ Route::get('/page/{pageId}/', function (int $pageId) {
             'article_url' => $document->getUrl(),
             'article_annotation' => $document->getAnnotation(),
         ];
-        $itemsArrAsHtml[] = view('default.article-mini', $viewData)->render();
+        $itemsArrAsHtml[] = view(TEMPLATES_DIR . '.article-mini', $viewData)->render();
     }
 
     return [
@@ -64,7 +73,7 @@ Route::get('/post/{postId}/', function (int $postId) {
      * @var \App\Models\RibbonModel $ribbon
      */
     $document = \App\Models\DocumentModel::findOrFail($postId);
-    $pageHtml = view('default.article', array(
+    $pageHtml = view(TEMPLATES_DIR . '.article', array(
         'article_id' => $postId,
         'title' => $document->title,
         'content' => $document->content,
@@ -72,6 +81,7 @@ Route::get('/post/{postId}/', function (int $postId) {
         'source_base_url' => $document->getSourceBaseUrl(),
         'url' => 'http://zalipay.com' . $document->getUrl(),
         'image' => '',
+        'showMetric' => !env('APP_DEBUG'),
     ));
 
     return $pageHtml;
@@ -87,7 +97,7 @@ Route::get('/ajax/post/{postId}/', function (int $postId) {
      */
     $document = \App\Models\DocumentModel::findOrFail($postId);
     $ribbon = \App\Models\RibbonModel::findOrFail($document->ribbon_id);
-    $pageHtml = view('default.article', [
+    $pageHtml = view(TEMPLATES_DIR . '.article', [
         'title' => $document->title,
         'content' => $document->content,
         'source_url' => $document->getSourceUrl(),
