@@ -15,16 +15,14 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="row">
-            <div class="col-lg-4" id="mc-column-1"></div>
-            <div class="col-lg-4" id="mc-column-2"></div>
-            <div class="col-lg-4" id="mc-column-3"></div>
+            <div class="col-lg-12" id="mc-column-1"></div>
         </div>
     </div>
     <div class="col-lg-12">
         <div class="row">
             <div class="col-lg-5"></div>
             <div class="col-lg-2">
-                <button onclick="loadPosts();" class="btn btn-primary btn-block">
+                <button onclick="loadPosts();" class="btn btn-default btn-block">
                     <strong>Загрузить ещё</strong>
                 </button>
             </div>
@@ -36,16 +34,7 @@
 <script>
 var currentPageNumber = 1;
 function appendItemToColumn(itemHtml) {
-    var columnIndex = 1;
-    var colHeight1 = $('#mc-column-1').height(),
-        colHeight2 = $('#mc-column-2').height(),
-        colHeight3 = $('#mc-column-3').height();
-    var minHeight = Math.min(colHeight1, colHeight2, colHeight3);
-    var cls = {};
-    cls[colHeight1] = 1;
-    cls[colHeight2] = 2;
-    cls[colHeight3] = 3;
-    $('#mc-column-'+cls[minHeight]).append(itemHtml);
+    $('#mc-column-1').append(itemHtml);
 }
 function loadPosts() {
     $.ajax({
