@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Zalipay" default="help">
+
+    <target name="help">
+        <exec command="phing -l"/>
+    </target>
+
+    <target name="composer-install">
+        <exec command="composer install" logoutput="true"/>
+    </target>
+
+    <target name="deploy" description="Развертывание проекта">
+        <echo msg="Развертывание проекта..." />
+        <phingcall target="composer-install"/>
+        <exec command="chown -R www-data:www-data storage bootstrap/cache"/>
+    </target>
+
+</project>
