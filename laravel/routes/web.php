@@ -16,7 +16,7 @@ use Jenssegers\Agent\Agent;
 
 $agent = new Agent();
 
-$templatesDir = 'default';
+$templatesDir = 'default2';
 if ($agent->isMobile()) {
     $templatesDir = 'mobile';
 }
