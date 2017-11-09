@@ -45,6 +45,7 @@ class RssItemToArticleConverter
 
         /** @var RssItemEntityInterface $rssItemEntity */
         foreach ($items as $rssItemEntity) {
+            echo $rssItemEntity->getLink(), PHP_EOL;
             try {
                 $articleEntity = $this->convertRssItemToOutsideArticle($rssItemEntity, $httTransport, $dataProvider);
             } catch (\Exception $e) {
