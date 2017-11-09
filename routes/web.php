@@ -20,7 +20,10 @@ $templatesDir = 'default2';
 if ($agent->isMobile()) {
     $templatesDir = 'mobile';
 }
-define('TEMPLATES_DIR', $templatesDir);
+
+if (!defined('TEMPLATES_DIR')) {
+    define('TEMPLATES_DIR', $templatesDir);
+}
 
 Route::get('/', function () {
     return view(TEMPLATES_DIR . '.index', [
