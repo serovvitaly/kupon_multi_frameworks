@@ -2,7 +2,7 @@
 
 namespace DataSource\Repositories;
 
-class RssRepository
+class RssRepository implements RssRepositoryInterface
 {
     public function findByUrl(string $url)
     {

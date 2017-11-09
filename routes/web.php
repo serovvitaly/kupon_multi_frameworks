@@ -36,26 +36,22 @@ Route::get('/', function () {
  */
 Route::get('/page/{pageId}/', function (int $pageId) {
 
-    $docsOnPage = 12;
-    $skip = ($pageId - 1) * $docsOnPage;
-
-    $documents = \App\Models\DocumentModel::skip($skip)->take($docsOnPage)->get();
+    $contentService = new \DataSource\Services\ContentService;
+    $documents = $contentService->getBaseContent();
 
     $itemsArrAsHtml = [];
     /**
-     * @var \App\Models\DocumentModel $document
-     * @var \App\Models\RibbonModel $ribbon
+     * @var \DataSource\Entities\ArticleEntityInterface $document
      */
     foreach ($documents as $document) {
-        $ribbon = \App\Models\RibbonModel::find($document->ribbon_id);
         $viewData = [
-            'article_id' => $document->id,
-            'ribbon_logo_url' => $ribbon->getLogoUrl(),
-            'ribbon_title' => $ribbon->title,
-            'article_title' => $document->title,
+            'article_id' => '',
+            'ribbon_logo_url' => '',
+            'ribbon_title' => '',
+            'article_title' => $document->getTitle(),
             'article_image_url' => '',
-            'article_url' => $document->getUrl(),
-            'article_annotation' => $document->getAnnotation(),
+            'article_url' => '',
+            'article_annotation' => $document->getDescription(),
         ];
         $itemsArrAsHtml[] = view(TEMPLATES_DIR . '.article-mini', $viewData)->render();
     }

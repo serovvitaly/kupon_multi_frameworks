@@ -2,7 +2,7 @@
 
 namespace DataSource\Entities;
 
-class RssItemEntity
+class RssItemEntity implements RssItemEntityInterface
 {
     protected $link;
     protected $title;
