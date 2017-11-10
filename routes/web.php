@@ -43,7 +43,7 @@ Route::get('sitemap.xml', function () {
             $pubDate = new \DateTime();
         }
         $url = $xml->createElement('url');
-        $url->appendChild($xml->createElement('loc', 'http://www.zalipay.com/' . $document->getEscapedFragmentUrl()));
+        $url->appendChild($xml->createElement('loc', 'http://www.zalipay.com' . $document->getEscapedFragmentUrl()));
         $url->appendChild($xml->createElement('lastmod', $pubDate->format('Y-m-d')));
         $url->appendChild($xml->createElement('priority', 0.8));
         $url->appendChild($xml->createElement('changefreq', 'monthly'));
