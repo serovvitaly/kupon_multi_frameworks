@@ -43,7 +43,7 @@ Route::get('sitemap.xml', function () {
             $pubDate = new \DateTime();
         }
         $url = $xml->createElement('url');
-        $url->appendChild($xml->createElement('loc', 'http://www.zalipay.com/post/' . $document->id));
+        $url->appendChild($xml->createElement('loc', 'http://www.zalipay.com/' . $document->getEscapedFragmentUrl()));
         $url->appendChild($xml->createElement('lastmod', $pubDate->format('Y-m-d')));
         $url->appendChild($xml->createElement('priority', 0.8));
         $url->appendChild($xml->createElement('changefreq', 'monthly'));
@@ -96,7 +96,10 @@ Route::get('/page/{pageId}/', function (int $pageId) {
 /**
  * Вывод статьи по указанному идентификатору
  */
-Route::get('/post/{postId}/', function (int $postId) {
+Route::get('/post/{postId?}/', function (int $postId = 0, Illuminate\Http\Request $request) {
+
+    $postId = (int)$request->get('_escaped_fragment_', $postId);
+
     /**
      * @var \App\Models\DocumentModel $document
      * @var \App\Models\RibbonModel $ribbon
