@@ -47,6 +47,11 @@ class DocumentModel extends Model
         return $sourceUrlParts['host'];
     }
 
+    public function getEscapedFragmentUrl()
+    {
+        return '/post/?_escaped_fragment_=' . $this->id;
+    }
+
     public function getUrl()
     {
         return '/post/' . $this->id . '/';
