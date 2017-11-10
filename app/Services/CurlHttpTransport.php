@@ -11,8 +11,7 @@ class CurlHttpTransport implements HttpTransportInterface
 {
     public function get(string $url): HttpResponseVOInterface
     {
-        $urlParts = parse_url($url);
-        $url = $urlParts['scheme'] . '://' . idn_to_ascii($urlParts['host']) . $urlParts['path'];
+        $url = \App\UrlHelper::idnToAscii($url);
 
         $ch = \curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

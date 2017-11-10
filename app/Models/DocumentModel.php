@@ -10,6 +10,8 @@ class DocumentModel extends Model
 
     public $timestamps = false;
 
+    protected $fillable = ['title', 'content', 'meta_data', 'ribbon_id'];
+
     public function getAnnotation()
     {
         $content = strip_tags($this->content, '<img><p><strong>');
@@ -17,6 +19,12 @@ class DocumentModel extends Model
         $annotationParts = array_slice($annotationParts, 0, 100);
         $annotation = implode(' ', $annotationParts);
         return $annotation;
+    }
+
+    public function getCleanContent()
+    {
+        $content = strip_tags($this->content, '<img><p><strong><ul><ol><li><br>');
+        return $content;
     }
 
     /**
