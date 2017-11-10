@@ -47,6 +47,15 @@ class RssItemToArticleConverter
         foreach ($items as $rssItemEntity) {
             try {
                 $articleEntity = $this->convertRssItemToOutsideArticle($rssItemEntity, $httTransport, $dataProvider);
+                \App\Models\DocumentModel::create([
+                    'title' => $articleEntity->getTitle(),
+                    'content' => $articleEntity->getContent(),
+                    'meta_data' => json_encode([
+                        'source_url' => \App\UrlHelper::idnToAscii($rssItemEntity->getLink()),
+                        'pub_date' => $rssItemEntity->getPubDate(),
+                    ]),
+                    'ribbon_id' => '5',
+                ]);
             } catch (\Exception $e) {
                 // todo: Нужно логирование
                 continue;

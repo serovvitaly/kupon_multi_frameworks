@@ -34,11 +34,30 @@ class ParseRss extends Command
      */
     public function handle()
     {
-        $rssUrl = 'http://xn--b1aga5aadd.xn--p1ai/rss/news.php';
-        $httTransport = new \App\Services\CurlHttpTransport;
-        $dataProvider = new \App\DataProviders\VoennoeRfDataProvider;
+        $urlDataSources = \App\Models\UrlDataSource::where('is_active', true)->get();
+
+        if (!count($urlDataSources)) {
+            return;
+        }
 
         $service = new \DataSource\Services\RssItemToArticleConverter;
-        $service->parseRssAndStoreArticlesByRssUrl($rssUrl, $httTransport, $dataProvider);
+        $httTransport = new \App\Services\CurlHttpTransport;
+
+        foreach ($urlDataSources as $urlDataSource) {
+
+            if (!class_exists($urlDataSource->provider)) {
+                $this->error('Class not exists: ' . $urlDataSource->provider);
+                continue;
+            }
+
+            $dataProvider = new $urlDataSource->provider;
+
+            if (!is_a($dataProvider, \DataSource\DataProviderInterface::class)) {
+                $this->error('Class not is a DataProviderInterface: ' . $urlDataSource->provider);
+                continue;
+            }
+
+            $service->parseRssAndStoreArticlesByRssUrl($urlDataSource->url, $httTransport, $dataProvider);
+        }
     }
 }

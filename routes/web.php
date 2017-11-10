@@ -80,7 +80,7 @@ Route::get('/page/{pageId}/', function (int $pageId) {
             'ribbon_title' => '',
             'article_title' => $document->getTitle(),
             'article_image_url' => '',
-            'article_url' => '',
+            'article_url' => $document->getContent(),
             'article_annotation' => $document->getDescription(),
         ];
         $itemsArrAsHtml[] = view(TEMPLATES_DIR . '.article-mini', $viewData)->render();
@@ -105,8 +105,8 @@ Route::get('/post/{postId}/', function (int $postId) {
     $pageHtml = view(TEMPLATES_DIR . '.article', array(
         'article_id' => $postId,
         'title' => $document->title,
-        'content' => $document->content,
-        'source_url' => $document->getSourceUrl(),
+        'content' => $document->getCleanContent(),
+        'source_url' => \App\UrlHelper::idnToUtf8($document->getSourceUrl()),
         'source_base_url' => $document->getSourceBaseUrl(),
         'url' => 'http://zalipay.com' . $document->getUrl(),
         'image' => '',
@@ -129,7 +129,7 @@ Route::get('/ajax/post/{postId}/', function (int $postId) {
     $pageHtml = view(TEMPLATES_DIR . '.article', [
         'title' => $document->title,
         'content' => $document->content,
-        'source_url' => $document->getSourceUrl(),
+        'source_url' => \App\UrlHelper::idnToUtf8($document->getSourceUrl()),
         'source_base_url' => $document->getSourceBaseUrl(),
     ])->render();
 

@@ -38,7 +38,9 @@
 </style>
 </head>
 <body>
+@if($showMetric)
 @include('default2.metric')
+@endif
 <div class="container-fluid container-main">
     <div class="row">
         <div class="col-lg-7">
