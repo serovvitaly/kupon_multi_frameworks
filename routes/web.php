@@ -25,6 +25,36 @@ if (!defined('TEMPLATES_DIR')) {
     define('TEMPLATES_DIR', $templatesDir);
 }
 
+Route::get('sitemap.xml', function () {
+
+    $documents = \App\Models\DocumentModel::where('is_active', true)->get();
+
+    $xml = new \DOMDocument('1.0', 'UTF-8');
+    $urlSet = $xml->createElement('urlset');
+    $urlSet->setAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+
+
+    /** @var \App\Models\DocumentModel $document */
+    foreach ($documents as $document) {
+        $metaData = json_decode($document->meta_data);
+        if (isset($metaData->pub_date)) {
+            $pubDate = new \DateTime($metaData->pub_date->date);
+        } else {
+            $pubDate = new \DateTime();
+        }
+        $url = $xml->createElement('url');
+        $url->appendChild($xml->createElement('loc', 'http://www.zalipay.com/post/' . $document->id));
+        $url->appendChild($xml->createElement('lastmod', $pubDate->format('Y-m-d')));
+        $url->appendChild($xml->createElement('priority', 0.8));
+        $url->appendChild($xml->createElement('changefreq', 'monthly'));
+        $urlSet->appendChild($url);
+    }
+
+    $xml->appendChild($urlSet);
+
+    return $xml->saveXml();
+});
+
 Route::get('/', function () {
     return view(TEMPLATES_DIR . '.index', [
         'showMetric' => !env('APP_DEBUG')
