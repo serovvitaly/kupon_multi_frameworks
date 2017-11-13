@@ -16,7 +16,7 @@ use Jenssegers\Agent\Agent;
 
 $agent = new Agent();
 
-$templatesDir = 'default2';
+$templatesDir = 'default';
 if ($agent->isMobile()) {
     $templatesDir = 'mobile';
 }
@@ -56,8 +56,12 @@ Route::get('sitemap.xml', function () {
 });
 
 Route::get('/', function () {
+
+    $documents = \App\Models\DocumentModel::where('is_active', true)->paginate(30);
+
     return view(TEMPLATES_DIR . '.index', [
-        'showMetric' => !env('APP_DEBUG')
+        'showMetric' => !env('APP_DEBUG'),
+        'documents' => $documents,
     ]);
 });
 
