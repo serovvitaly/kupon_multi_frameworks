@@ -54,6 +54,6 @@ class DocumentModel extends Model
 
     public function getUrl()
     {
-        return '/post/' . $this->id . '/';
+        return $this->getEscapedFragmentUrl();
     }
 }
