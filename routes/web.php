@@ -103,6 +103,16 @@ Route::get('/page/{pageId}/', function (int $pageId) {
  */
 Route::get('/post/{postId?}/', function (int $postId = 0, Illuminate\Http\Request $request) {
 
+    if ($postId > 0) {
+        $document = \App\Models\DocumentModel::findOrFail($postId);
+        $redirectUrl = $document->getUrl();
+        $from = $request->get('from');
+        if (!empty($from)) {
+            $redirectUrl .= '&from=' . $from;
+        }
+        return redirect($redirectUrl);
+    }
+
     $postId = (int)$request->get('_escaped_fragment_', $postId);
 
     /**
