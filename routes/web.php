@@ -53,7 +53,8 @@ Route::get('sitemap.xml', function () {
 
     $xml->appendChild($urlSet);
 
-    return $xml->saveXml();
+    return response($xml->saveXml(), 200)
+               ->header('Content-Type', 'text/xml');
 });
 
 Route::get('/', function () {
