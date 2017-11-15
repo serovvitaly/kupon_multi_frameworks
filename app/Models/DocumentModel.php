@@ -10,7 +10,14 @@ class DocumentModel extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['title', 'content', 'meta_data', 'ribbon_id'];
+    protected $fillable = [
+        'title',
+        'content',
+        'meta_data',
+        'ribbon_id',
+        'source_url',
+        'published_at',
+    ];
 
     public function getAnnotation()
     {
