@@ -21,7 +21,8 @@ class DocumentModel extends Model
 
     public function getAnnotation()
     {
-        $content = strip_tags($this->content, '<img><p><strong>');
+        $content = $this->content;
+        $content = strip_tags($content);
         $annotationParts = explode(' ', $content);
         $annotationParts = array_slice($annotationParts, 0, 100);
         $annotation = implode(' ', $annotationParts);
