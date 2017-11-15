@@ -59,7 +59,9 @@ Route::get('sitemap.xml', function () {
 
 Route::get('/', function () {
 
-    $documents = \App\Models\DocumentModel::where('is_active', true)->paginate(30);
+    $documents = \App\Models\DocumentModel::where('is_active', true)
+        ->orderBy('published_at', 'desc')
+        ->paginate(30);
 
     return view(TEMPLATES_DIR . '.index', [
         'showMetric' => !env('APP_DEBUG'),
