@@ -61,7 +61,7 @@ Route::get('/', function () {
 
     $documents = \App\Models\DocumentModel::where('is_active', true)
         ->orderBy('published_at', 'desc')
-        ->paginate(30);
+        ->paginate(20);
 
     return view(TEMPLATES_DIR . '.index', [
         'showMetric' => !env('APP_DEBUG'),
