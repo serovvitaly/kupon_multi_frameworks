@@ -41,8 +41,7 @@ class DocumentModel extends Model
      */
     public function getSourceUrl()
     {
-        $metaData = json_decode($this->meta_data);
-        return $metaData->source_url;
+        return $this->source_url;
     }
 
     /**
