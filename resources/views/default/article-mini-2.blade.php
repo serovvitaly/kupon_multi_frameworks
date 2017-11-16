@@ -1,5 +1,5 @@
 <div>
-    <a href="{{ $doc->getUrl() }}?from=index">
+    <a href="{{ $doc->getUrl() }}&from=index">
         <h3 class="media-heading title">{{ $doc->title }}</h3>
     </a>
     <p class="" style="display: block;">
