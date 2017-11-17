@@ -31,7 +31,8 @@ class DocumentModel extends Model
 
     public function getCleanContent()
     {
-        $content = strip_tags($this->content, '<img><p><strong><ul><ol><li><br>');
+        $content = strip_tags($this->content, '<img><p><strong><ul><ol><li><br><div><table><tr><th>td>');
+        $content = str_ireplace('src="/', 'src="' . $this->getSourceUrlHost() . '/', $content);
         return $content;
     }
 
@@ -70,5 +71,10 @@ class DocumentModel extends Model
             return (new \DateTime($this->published_at))->format($format);
         }
         return $this->published_at;
+    }
+
+    public function getSourceUrlHost()
+    {
+        return parse_url($this->source_url, PHP_URL_SCHEME) . '://' . parse_url($this->source_url, PHP_URL_HOST);
     }
 }
