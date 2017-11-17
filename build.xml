@@ -10,6 +10,11 @@
         <exec command="composer install" logoutput="true"/>
     </target>
 
+    <target name="git-pull-master" description="Подтягивание свежую ветку master из репозитория">
+        <exec command="git fetch" logoutput="true"/>
+        <exec command="git pull origin master" logoutput="true"/>
+    </target>
+
     <target name="deploy" description="Развертывание проекта">
         <echo msg="Развертывание проекта..." />
         <phingcall target="composer-install"/>
