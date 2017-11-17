@@ -13,12 +13,17 @@
 
 @section('center')
     <h3 class="title">{{ $title }}</h3>
+    <p class="small">
+        <span>{{ $publishedAt }}</span>
+        &#8226;
+        <noindex>
+            <span>Источник:
+                <a rel="nofollow" target="_blanck" href="{{ $source_url }}">{{ $source_url }}</a>
+            </span>
+        </noindex>
+    </p>
+    <hr>
     <article class="post-content">
         {!! $content !!}
     </article>
-    <p>
-        <a href="{{ $source_url }}" class="btn btn-sm btn-default" target="_blank">
-            <strong>Источник:</strong> {{ $source_base_url }}
-        </a>
-    </p>
 @endsection

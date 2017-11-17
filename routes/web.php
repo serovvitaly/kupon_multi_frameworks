@@ -132,6 +132,7 @@ Route::get('/post/{postId?}/', function (int $postId = 0, Illuminate\Http\Reques
         'url' => 'http://zalipay.com' . $document->getUrl(),
         'image' => '',
         'showMetric' => !env('APP_DEBUG'),
+        'publishedAt' => $document->publishedAtFormated('d.m.Y'),
     ));
 
     return $pageHtml;
