@@ -17,7 +17,9 @@
 <link href="/css/styles.css?1" rel="stylesheet"/>
 </head>
 <body>
+@if($showMetric)
 @include('default.metric')
+@endif
 <div class="container container-main">
     @yield('content')
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
