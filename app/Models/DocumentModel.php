@@ -63,4 +63,12 @@ class DocumentModel extends Model
     {
         return $this->getEscapedFragmentUrl();
     }
+
+    public function publishedAtFormated($format = null): string
+    {
+        if (!empty($format)) {
+            return (new \DateTime($this->published_at))->format($format);
+        }
+        return $this->published_at;
+    }
 }
