@@ -162,3 +162,7 @@ Route::get('/ajax/post/{postId}/', function (int $postId) {
         'ribbon_title' => $ribbon->title,
     ];
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
