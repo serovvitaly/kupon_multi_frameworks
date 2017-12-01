@@ -42,7 +42,7 @@ class DocumentModel extends Model
      */
     public function getSourceUrl()
     {
-        return $this->source_url;
+        return \App\UrlHelper::idnToUtf8($this->source_url);
     }
 
     /**
