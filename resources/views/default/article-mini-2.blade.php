@@ -10,7 +10,7 @@
         &#8226;
         <noindex>
             <span>Источник:
-                <a rel="nofollow" target="_blanck" href="{{ $doc->source_url }}">{{ $doc->source_url }}</a>
+                <a rel="nofollow" target="_blanck" href="{{ $doc->getSourceUrl() }}">{{ $doc->getSourceUrl() }}</a>
             </span>
         </noindex>
     </p>
