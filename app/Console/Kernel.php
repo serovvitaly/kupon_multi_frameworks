@@ -16,6 +16,8 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\ProgressmanUrlCorrector::class,
         \App\Console\Commands\Test::class,
         \App\Console\Commands\ParseRss::class,
+        \App\Console\Commands\SitemapLoad::class,
+        \App\Console\Commands\SitemapParse::class,
     ];
 
     /**
