@@ -12,7 +12,7 @@ class SitemapParse extends Command
      *
      * @var string
      */
-    protected $signature = 'sm:load';
+    protected $signature = 'sm:parse';
 
     /**
      * The console command description.
@@ -33,24 +33,30 @@ class SitemapParse extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
     public function handle()
     {
-
-
-        $files = scandir('html');
+        $siteMapUrl = 'https://kedem.ru/sitemap.xml';
+        $siteMap = simplexml_load_file($siteMapUrl);
 
         $parser = new \Src\Parsers\KedemRuParser;
 
         $mysqlStorage = new \Src\Storages\MysqlStorage();
         $recipesService = new \Src\RecipesService();
 
-        foreach ($files as $fileName) {
-            $content = file_get_contents('html/' . $fileName);
-            $crawler = new Crawler($content);
-            $recipe = $parser->getRecipeByCrawler($crawler);
+        foreach ($siteMap->url as $url) {
+            $locUrlPath = parse_url($url->loc, PHP_URL_PATH);
+            if (substr($locUrlPath, 1, 6) !== 'recipe') {
+                continue;
+            }
+
+            try {
+                $content = file_get_contents($url->loc);
+                $crawler = new Crawler($content);
+                $recipe = $parser->getRecipeByCrawler($crawler);
+            } catch (\Exception $e) {
+                continue;
+            }
 
             if (!$recipe) {
                 continue;

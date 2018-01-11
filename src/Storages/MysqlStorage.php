@@ -13,7 +13,7 @@ class MysqlStorage implements StorageInterface
 
     public function __construct()
     {
-        $this->pdo = new \PDO('mysql:host=localhost;dbname=recipes;charset=utf8', 'root', '123');
+        $this->pdo = new \PDO('mysql:host=localhost;dbname=zalipay;charset=utf8', 'root', '123');
         $this->recipeQuery = $this->pdo->prepare(
             'INSERT INTO recipes SET `name` = :name, image = :image, recipeInstructions = :recipeInstructions'
         );
