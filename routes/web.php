@@ -101,6 +101,24 @@ Route::get('/page/{pageId}/', function (int $pageId) {
     ];
 });
 
+Route::get(
+    '/{objectType}{objectId}',
+    function (string $objectType, int $objectId, Illuminate\Http\Request $request) {
+
+        $objectModelName = config('types.' . $objectType . '.model');
+        $objectModel = new $objectModelName;
+        $object = $objectModel->findOrFail($objectId);
+
+        $viewDataArr = $object->toArray();
+        $viewDataArr['showMetric'] = !env('APP_DEBUG');
+
+        return view(TEMPLATES_DIR . '.' . config('types.' . $objectType . '.view'), $viewDataArr);
+
+    })->where([
+        'objectType' => '[a-z]+',
+        'objectId' => '[0-9]+'
+    ]);
+
 /**
  * Вывод статьи по указанному идентификатору
  */
