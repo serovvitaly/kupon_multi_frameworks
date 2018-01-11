@@ -7,12 +7,6 @@
     </p>
     <p class="small">
         <span>{{ $doc->publishedAtFormated('d.m.Y') }}</span>
-        &#8226;
-        <noindex>
-            <span>Источник:
-                <a rel="nofollow" target="_blanck" href="{{ $doc->getSourceUrl() }}">{{ $doc->getSourceUrl() }}</a>
-            </span>
-        </noindex>
     </p>
 </div>
 <hr>
